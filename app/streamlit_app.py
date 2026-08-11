@@ -214,8 +214,19 @@ with tab_historico:
     variacion_real = (last["ars_const"] / first["ars_const"] - 1) * 100
     st.caption(
         f"Entre {first['date'].strftime('%b %Y')} y {last['date'].strftime('%b %Y')}, "
-        f"el sueldo mediano en pesos constantes (poder adquisitivo real) varió {variacion_real:+.1f}%."
+        f"el sueldo mediano en pesos constantes (poder adquisitivo real) varió {variacion_real:+.1f}%. "
+        "Ojo: cada edición la responde gente distinta (no es la misma persona en el tiempo), "
+        "así que parte de esta variación puede deberse a cambios en quién respondió la "
+        "encuesta, no solo a que a cada individuo le haya ido mejor o peor."
     )
+    if moneda == "Dólares blue":
+        st.caption(
+            "⚠️ Argentina tuvo cepo cambiario hasta abril de 2025, con una brecha grande "
+            "entre el dólar oficial y el blue. Desde que se levantó el cepo ambas "
+            "cotizaciones casi se unificaron (se nota en el gráfico hacia el final de la "
+            "serie), así que comparar dólares blue de 2021 contra los de 2026 mezcla dos "
+            "regímenes cambiarios distintos."
+        )
 
     st.divider()
 
@@ -248,7 +259,11 @@ with tab_historico:
     st.caption(
         f"En {gs.iloc[0]['date'].strftime('%b %Y')}, una mujer cis ganaba {brecha_ini*100:.0f} centavos "
         f"por cada peso de un hombre cis. En {gs.iloc[-1]['date'].strftime('%b %Y')}, {brecha_fin*100:.0f} centavos. "
-        "La brecha prácticamente no se movió en estos 6 años."
+        "La brecha prácticamente no se movió en estos 6 años. "
+        "Esta es la brecha **cruda** (sin ajustar por rol o seniority): mezcla discriminación "
+        "salarial real con que hay menos mujeres en puestos senior/mejor pagos, no equivale a "
+        "'cobran menos por el mismo puesto'. openqube reporta en su sitio que la brecha se "
+        "agranda con los años de experiencia."
     )
 
     st.divider()

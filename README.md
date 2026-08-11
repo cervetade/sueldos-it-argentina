@@ -69,14 +69,35 @@ semestrales desde 2020, algo que quedó fuera del alcance de este proyecto.
 - **El sueldo real (ajustado por inflación con el IPC del INDEC) subió ~21%**
   entre febrero 2020 y marzo 2026, pese a que en pesos nominales se multiplicó
   por 44x — sin ajustar por inflación, la comparación en pesos no dice nada.
-- Ya en agosto 2020 (a meses de arrancar la cuarentena) el sueldo real había
-  saltado ~13% respecto de febrero de ese año, coincidiendo con el boom de
-  contratación remota en tech durante la pandemia.
-- **La brecha de género prácticamente no se movió**: en febrero 2020 una
-  mujer cis ganaba 83 centavos por cada peso de un hombre cis; en marzo 2026,
-  81 centavos. Seis años, casi sin cambios.
+- En agosto 2020 el sueldo real ya mostraba un salto de ~13% respecto de
+  febrero de ese año. No hay forma de confirmar con estos datos *por qué*
+  (podría ser demanda real de talento remoto, podría ser un cambio en el
+  perfil de quién respondió la encuesta en plena cuarentena) — se muestra el
+  dato, no una explicación causal.
+- **La brecha de género cruda (sin ajustar por rol o seniority) prácticamente
+  no se movió**: en febrero 2020 una mujer cis ganaba 83 centavos por cada
+  peso de un hombre cis; en marzo 2026, 81 centavos. Esta cifra mezcla
+  discriminación salarial real con el hecho de que hay menos mujeres en
+  puestos senior/mejor pagos — no equivale a "cobran menos por el mismo
+  puesto". openqube reporta en su propio sitio que la brecha se agranda con
+  los años de experiencia.
 - La participación de mujeres cis en la encuesta subió de ~14% (2020) a ~20%
   (2026), pero eso no se tradujo en una brecha salarial menor.
+
+**Limitaciones a tener en cuenta:**
+
+- Cada edición de la encuesta la responde gente distinta (no es un panel que
+  sigue a las mismas personas en el tiempo). Un cambio en la mediana entre
+  ediciones puede deberse a que cambió quién respondió (más/menos gente
+  senior, de tal o cual rol), no necesariamente a que a cada individuo le
+  haya ido mejor o peor.
+- La comparación en **dólares blue** no es homogénea en todo el período:
+  Argentina mantuvo un cepo cambiario hasta abril de 2025, con una brecha
+  grande entre el dólar oficial y el blue (informal). Desde que se levantó el
+  cepo, ambas cotizaciones prácticamente se unificaron — se puede ver en los
+  propios datos, donde oficial y blue casi coinciden a partir de 2025-08. Por
+  eso, comparar "sueldo en dólares blue" de 2021 contra el de 2026 mezcla dos
+  regímenes cambiarios distintos.
 
 ## Cómo correrlo
 
