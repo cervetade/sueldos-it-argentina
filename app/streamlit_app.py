@@ -52,6 +52,7 @@ def load_historico() -> dict:
         "genero_pct": pd.read_csv(HIST_DIR / "historico_genero_participacion.csv", parse_dates=["date"]),
         "genero_salario": pd.read_csv(HIST_DIR / "historico_genero_salario.csv", parse_dates=["date"]),
         "conformidad": pd.read_csv(HIST_DIR / "historico_conformidad_genero.csv", parse_dates=["date"]),
+        "modalidad": pd.read_csv(HIST_DIR / "historico_modalidad.csv", parse_dates=["date"]),
     }
 
 
@@ -177,13 +178,14 @@ with tab_historico:
         "en Argentina empezó el 20/03/2020, marcada con una línea punteada."
     )
     st.info(
-        "**Por qué esta vista se enfoca en sueldo y género:** openqube solo "
-        "publica pre-consolidadas 4 series históricas (sueldo mediano, "
-        "participación por género, sueldo por género y conformidad por "
-        "género). No existe un histórico armado de modalidad de trabajo "
-        "(remoto/híbrido/presencial) para ver ese quiebre desde la "
-        "cuarentena — para eso habría que procesar a mano el dataset crudo "
-        "de cada una de las ~12 ediciones semestrales desde 2020.",
+        "**Por qué el sueldo y el género van desde 2020 pero la modalidad de trabajo "
+        "solo desde 2023:** openqube publica pre-consolidadas 4 series desde 2016 "
+        "(sueldo mediano, participación por género, sueldo por género y conformidad). "
+        "La pregunta de modalidad de trabajo (remoto/híbrido/presencial), en cambio, "
+        "no existía en la encuesta hasta 2023 — se revisaron a mano los datasets "
+        "crudos de 2020, 2021 y 2022 y esa pregunta directamente no estaba, ni "
+        "siquiera en la edición de agosto 2020, recién arrancada la cuarentena. Por "
+        "eso ese gráfico arranca en 2023.1, no en 2020.",
         icon="ℹ️",
     )
 
@@ -279,6 +281,35 @@ with tab_historico:
     fig_c.update_layout(yaxis_title="Conformidad promedio (1-4)", xaxis_title="Edición")
     st.plotly_chart(fig_c, use_container_width=True)
 
+    st.divider()
+
+    # --- Modalidad de trabajo (2023-2026) ---
+    st.subheader("Modalidad de trabajo: remoto vs. híbrido vs. presencial (2023-2026)")
+    st.caption(
+        "Esta serie arranca en enero 2023, no en 2020: es la primera edición donde "
+        "la encuesta preguntó modalidad de trabajo como categoría fija. Construida "
+        "procesando a mano el dataset crudo de cada una de las 6 ediciones desde "
+        "entonces (no viene pre-consolidada por openqube, a diferencia de las series "
+        "de arriba)."
+    )
+    m = hist["modalidad"]
+    fig_m = go.Figure()
+    fig_m.add_trace(go.Scatter(x=m["date"], y=m["remoto_pct"], mode="lines+markers", name="100% remoto"))
+    fig_m.add_trace(go.Scatter(x=m["date"], y=m["hibrido_pct"], mode="lines+markers", name="Híbrido"))
+    fig_m.add_trace(go.Scatter(x=m["date"], y=m["presencial_pct"], mode="lines+markers", name="100% presencial"))
+    fig_m.update_layout(yaxis_title="% de respuestas", xaxis_title="Edición")
+    st.plotly_chart(fig_m, use_container_width=True)
+
+    remoto_ini, remoto_fin = m.iloc[0]["remoto_pct"], m.iloc[-1]["remoto_pct"]
+    hibrido_ini, hibrido_fin = m.iloc[0]["hibrido_pct"], m.iloc[-1]["hibrido_pct"]
+    st.caption(
+        f"Entre {m.iloc[0]['date'].strftime('%b %Y')} y {m.iloc[-1]['date'].strftime('%b %Y')}, "
+        f"el 100% remoto bajó de {remoto_ini:.0f}% a {remoto_fin:.0f}%, mientras que el híbrido "
+        f"subió de {hibrido_ini:.0f}% a {hibrido_fin:.0f}%. El presencial se mantuvo chico y estable "
+        f"(~7-9%). Lectura: no es que la gente haya vuelto a la oficina de golpe, es un corrimiento "
+        "gradual de remoto puro hacia esquemas híbridos."
+    )
+
     with st.expander("Ver datos históricos"):
         st.write("Sueldo mediano")
         st.dataframe(hist["salario"])
@@ -288,3 +319,5 @@ with tab_historico:
         st.dataframe(hist["genero_salario"])
         st.write("Conformidad por género")
         st.dataframe(hist["conformidad"])
+        st.write("Modalidad de trabajo")
+        st.dataframe(hist["modalidad"])

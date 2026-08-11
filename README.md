@@ -58,13 +58,17 @@ y consolida edición a edición (no es un cálculo propio: son los datos
 oficiales de "progresión histórica" de su sitio, extraídos de su reporte
 público y guardados en `data/processed/historico_*.csv`).
 
-**Nota sobre el alcance**: openqube solo tiene pre-consolidadas 4 series
-históricas — sueldo mediano, participación por género, sueldo por género y
-conformidad por género. Por eso esta vista se enfoca en esos ejes. No existe
-un histórico armado de modalidad de trabajo (remoto/híbrido/presencial), que
-hubiera sido ideal para mostrar el quiebre de la cuarentena; conseguirlo
-requeriría procesar a mano el dataset crudo de cada una de las ~12 ediciones
-semestrales desde 2020, algo que quedó fuera del alcance de este proyecto.
+**Nota sobre el alcance**: openqube tiene pre-consolidadas 4 series desde
+2016 — sueldo mediano, participación por género, sueldo por género y
+conformidad por género — usadas tal cual las publica. La modalidad de
+trabajo (remoto/híbrido/presencial) es distinta: **no existía como pregunta
+en la encuesta hasta 2023**. Se revisó a mano el dataset crudo de cada
+edición desde 2020 y esa categoría directamente no está en 2020, 2021 ni
+2022 (ni siquiera en la edición de agosto 2020, recién arrancada la
+cuarentena) — recién aparece en la edición 2023.1. Por eso esa serie
+específica va de 2023 a 2026, no de 2020 a 2026, y se construyó procesando
+a mano el dataset crudo de cada una de esas 6 ediciones (no viene
+pre-consolidada por openqube).
 
 - **El sueldo real (ajustado por inflación con el IPC del INDEC) subió ~21%**
   entre febrero 2020 y marzo 2026, pese a que en pesos nominales se multiplicó
@@ -83,6 +87,11 @@ semestrales desde 2020, algo que quedó fuera del alcance de este proyecto.
   los años de experiencia.
 - La participación de mujeres cis en la encuesta subió de ~14% (2020) a ~20%
   (2026), pero eso no se tradujo en una brecha salarial menor.
+- **Modalidad de trabajo (2023-2026)**: el 100% remoto viene bajando de forma
+  sostenida, de 59% (ene 2023) a 48% (mar 2026), mientras el híbrido subió de
+  33% a 44% en el mismo período. El presencial puro se mantuvo chico y
+  estable (7-9%). Lectura: no es una vuelta a la oficina de golpe, es un
+  corrimiento gradual de remoto puro hacia esquemas híbridos.
 
 **Limitaciones a tener en cuenta:**
 
