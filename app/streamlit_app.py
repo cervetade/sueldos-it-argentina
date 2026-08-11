@@ -176,6 +176,16 @@ with tab_historico:
         "que publica openqube en cada edición de la encuesta. La cuarentena por COVID-19 "
         "en Argentina empezó el 20/03/2020, marcada con una línea punteada."
     )
+    st.info(
+        "**Por qué esta vista se enfoca en sueldo y género:** openqube solo "
+        "publica pre-consolidadas 4 series históricas (sueldo mediano, "
+        "participación por género, sueldo por género y conformidad por "
+        "género). No existe un histórico armado de modalidad de trabajo "
+        "(remoto/híbrido/presencial) para ver ese quiebre desde la "
+        "cuarentena — para eso habría que procesar a mano el dataset crudo "
+        "de cada una de las ~12 ediciones semestrales desde 2020.",
+        icon="ℹ️",
+    )
 
     QUARANTINE_DATE = "2020-03-20"
 

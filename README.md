@@ -58,6 +58,14 @@ y consolida edición a edición (no es un cálculo propio: son los datos
 oficiales de "progresión histórica" de su sitio, extraídos de su reporte
 público y guardados en `data/processed/historico_*.csv`).
 
+**Nota sobre el alcance**: openqube solo tiene pre-consolidadas 4 series
+históricas — sueldo mediano, participación por género, sueldo por género y
+conformidad por género. Por eso esta vista se enfoca en esos ejes. No existe
+un histórico armado de modalidad de trabajo (remoto/híbrido/presencial), que
+hubiera sido ideal para mostrar el quiebre de la cuarentena; conseguirlo
+requeriría procesar a mano el dataset crudo de cada una de las ~12 ediciones
+semestrales desde 2020, algo que quedó fuera del alcance de este proyecto.
+
 - **El sueldo real (ajustado por inflación con el IPC del INDEC) subió ~21%**
   entre febrero 2020 y marzo 2026, pese a que en pesos nominales se multiplicó
   por 44x — sin ajustar por inflación, la comparación en pesos no dice nada.
