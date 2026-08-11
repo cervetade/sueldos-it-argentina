@@ -19,7 +19,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-DB_PATH = BASE_DIR / "data" / "processed" / "sueldos.db"
+CLEAN_CSV_PATH = BASE_DIR / "data" / "processed" / "sueldos_clean.csv"
 HIST_DIR = BASE_DIR / "data" / "processed"
 
 st.set_page_config(page_title="Sueldos IT Argentina 2026", layout="wide")
@@ -27,7 +27,17 @@ st.set_page_config(page_title="Sueldos IT Argentina 2026", layout="wide")
 
 @st.cache_data
 def load_data() -> pd.DataFrame:
-    with sqlite3.connect(DB_PATH) as conn:
+    """Carga el dataset limpio y lo pasa por SQLite (en memoria) antes de
+    graficarlo, para mantener la consulta vía SQL como parte del pipeline.
+
+    Nota: no dependemos de un archivo .db persistido en el repo (los binarios
+    quedan afuera del control de versiones vía .gitignore); la base se arma
+    al vuelo a partir de data/processed/sueldos_clean.csv, así funciona igual
+    corriendo local o desplegado en Streamlit Cloud.
+    """
+    raw = pd.read_csv(CLEAN_CSV_PATH)
+    with sqlite3.connect(":memory:") as conn:
+        raw.to_sql("salarios", conn, index=False)
         df = pd.read_sql("SELECT * FROM salarios", conn)
     df["seniority"] = pd.Categorical(
         df["seniority"], categories=["Junior", "Semi-Senior", "Senior"], ordered=True
