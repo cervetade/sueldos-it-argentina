@@ -87,7 +87,7 @@ streamlit run app/streamlit_app.py
 
 ## Dashboard en vivo
 
-(pendiente: link a Streamlit Community Cloud una vez publicado)
+**[sueldos-it-argentina.streamlit.app](https://sueldos-it-argentina-ppprndbhcwn4enxtjyxncn.streamlit.app/)**
 
 ## Estructura del repo
 
