@@ -1,10 +1,14 @@
 # Sueldos IT Argentina — Dashboard interactivo
 
 Pipeline ETL en Python + dashboard interactivo en Streamlit sobre la Encuesta de
-Sueldos IT de Sysarmy (edición 2026.1, 4.939 respuestas). El objetivo es
-responder una pregunta simple con datos: **¿de qué depende realmente el sueldo
-de alguien en IT en Argentina** — seniority, rol, modalidad de trabajo,
-ubicación o género — **y cuánto pesa cada variable?**
+Sueldos IT de Sysarmy. Tiene dos vistas: una foto de la edición actual
+(2026.1, 4.939 respuestas) y una **evolución histórica 2020-2026** que muestra
+cómo cambiaron los sueldos reales y la brecha de género desde antes de la
+cuarentena por COVID-19 hasta hoy.
+
+El objetivo es responder dos preguntas con datos: **¿de qué depende el sueldo
+de alguien en IT en Argentina hoy** (seniority, rol, modalidad, ubicación,
+género) **y cómo evolucionó eso en los últimos seis años?**
 
 ## Pipeline
 
@@ -47,6 +51,25 @@ de sueldo):
 ![Sueldo por seniority](assets/sueldo_por_seniority.png)
 ![Sueldo por rol](assets/sueldo_por_rol.png)
 
+## Evolución histórica (2020-2026)
+
+La segunda pestaña del dashboard usa series semestrales que openqube publica
+y consolida edición a edición (no es un cálculo propio: son los datos
+oficiales de "progresión histórica" de su sitio, extraídos de su reporte
+público y guardados en `data/processed/historico_*.csv`).
+
+- **El sueldo real (ajustado por inflación con el IPC del INDEC) subió ~21%**
+  entre febrero 2020 y marzo 2026, pese a que en pesos nominales se multiplicó
+  por 44x — sin ajustar por inflación, la comparación en pesos no dice nada.
+- Ya en agosto 2020 (a meses de arrancar la cuarentena) el sueldo real había
+  saltado ~13% respecto de febrero de ese año, coincidiendo con el boom de
+  contratación remota en tech durante la pandemia.
+- **La brecha de género prácticamente no se movió**: en febrero 2020 una
+  mujer cis ganaba 83 centavos por cada peso de un hombre cis; en marzo 2026,
+  81 centavos. Seis años, casi sin cambios.
+- La participación de mujeres cis en la encuesta subió de ~14% (2020) a ~20%
+  (2026), pero eso no se tradujo en una brecha salarial menor.
+
 ## Cómo correrlo
 
 ```bash
@@ -69,11 +92,11 @@ streamlit run app/streamlit_app.py
 ## Estructura del repo
 
 ```
-data/raw/            CSV original de la encuesta
-data/processed/       dataset limpio (csv) + base SQLite
+data/raw/            CSV original de la encuesta 2026.1
+data/processed/       dataset limpio (csv) + base SQLite + series históricas 2020-2026
 src/clean.py          transform: limpieza y normalización
 src/db.py             load: persistencia en SQLite
-app/streamlit_app.py  dashboard interactivo
+app/streamlit_app.py  dashboard interactivo (foto actual + evolución histórica)
 notebooks/01_eda.ipynb  exploración inicial
 assets/                gráficos estáticos usados en este README
 ```
